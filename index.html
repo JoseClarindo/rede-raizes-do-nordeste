@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Protótipo front-end da Rede Raízes do Nordeste.">
+  <title>Raízes do Nordeste | Pedido</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-canal="app">
+<header class="topo">
+  <a class="marca" href="#" data-tela="inicio" aria-label="Raízes do Nordeste - início">
+    <span class="logo">RN</span><span><strong>Raízes do Nordeste</strong><small>comida que lembra casa</small></span>
+  </a>
+  <label class="canal">Canal
+    <select id="canal" aria-label="Selecionar canal"><option value="app">App / celular</option><option value="web">Site / computador</option><option value="totem">Totem</option></select>
+  </label>
+</header>
+
+<main class="container">
+  <section id="inicio" class="tela ativa">
+    <div class="hero">
+      <div><p class="tag">REDE RAÍZES DO NORDESTE</p><h1>Comida nordestina para comer aqui ou levar.</h1><p>Escolha a unidade, monte seu pedido e acompanhe tudo pelo mesmo lugar.</p><button class="btn" data-tela="cardapio">Ver cardápio</button></div>
+      <div class="cartao-pontos"><span>Raízes+</span><b><span id="home-pontos">120</span> pontos</b><small>80 pontos para o próximo desconto.</small><button class="link" data-tela="raizes">Ver benefícios</button></div>
+    </div>
+    <div class="titulo-linha"><h2>Unidade</h2><button class="link" data-tela="unidades">trocar</button></div>
+    <button class="unidade-selecionada" data-tela="unidades"><span><b id="unidade-home">Centro</b><small id="endereco-home">Rua Principal, 120 · 1,8 km</small></span><span class="aberta">Aberta</span></button>
+    <div class="titulo-linha"><h2>Promoções</h2><button class="link" data-tela="campanhas">ver todas</button></div>
+    <div id="destaques" class="produtos"></div>
+  </section>
+
+  <section id="unidades" class="tela"><button class="voltar" data-tela="inicio">← voltar</button><h1>Escolha a unidade</h1><p class="cinza">O cardápio e a disponibilidade podem mudar de uma unidade para outra.</p><div id="lista-unidades"></div></section>
+
+  <section id="login" class="tela"><button class="voltar" data-tela="inicio">← voltar</button><div class="form-card"><p class="tag">MINHA CONTA</p><h1>Entrar</h1><p class="cinza">Use uma conta de demonstração ou crie uma nova.</p><div id="login-erro" class="erro oculto" role="alert"></div><label>E-mail<input id="login-email" type="email" autocomplete="email" placeholder="voce@email.com"></label><label>Senha<input id="login-senha" type="password" autocomplete="current-password" placeholder="••••••••"></label><button id="entrar" class="btn largo">Entrar</button><button class="link centralizado" data-tela="cadastro">Criar conta</button><button class="link centralizado" data-tela="recuperar">Esqueci minha senha</button><p class="ajuda">Demonstração: joao@raizes.local / 123456</p></div></section>
+
+  <section id="cadastro" class="tela"><button class="voltar" data-tela="login">← voltar</button><div class="form-card"><h1>Criar conta</h1><div id="cadastro-erro" class="erro oculto" role="alert"></div><label>Nome<input id="cadastro-nome" type="text" placeholder="Seu nome"></label><label>E-mail<input id="cadastro-email" type="email" placeholder="voce@email.com"></label><label>Senha<input id="cadastro-senha" type="password" minlength="6" placeholder="Mínimo de 6 caracteres"></label><label class="check"><input id="cadastro-consentimento" type="checkbox"> Concordo com o uso dos dados necessários para criar a conta e realizar pedidos.</label><label class="check"><input id="cadastro-marketing" type="checkbox"> Quero receber promoções e novidades. <span class="cinza">Opcional.</span></label><button id="criar-conta" class="btn largo">Criar conta</button></div></section>
+
+  <section id="recuperar" class="tela"><button class="voltar" data-tela="login">← voltar</button><div class="form-card"><h1>Recuperar senha</h1><p class="cinza">No protótipo, o envio é simulado.</p><div id="recuperar-msg" class="sucesso-msg oculto" role="status"></div><label>E-mail<input id="recuperar-email" type="email" placeholder="voce@email.com"></label><button id="recuperar-btn" class="btn largo">Enviar instruções</button></div></section>
+
+  <section id="cardapio" class="tela"><div class="titulo-linha"><div><button class="voltar" data-tela="inicio">← voltar</button><h1>Cardápio</h1></div><button class="carrinho" data-tela="carrinho">Carrinho (<span id="qtd-carrinho">0</span>)</button></div><div class="aviso"><b>Campanha da semana:</b> Baião de Dois + bebida por R$ 29,90.</div><div class="filtros"><button class="filtro selecionado" data-filtro="Todos">Todos</button><button class="filtro" data-filtro="Pratos">Pratos</button><button class="filtro" data-filtro="Lanches">Lanches</button><button class="filtro" data-filtro="Bebidas">Bebidas</button></div><div id="lista-produtos" class="produtos"></div></section>
+
+  <section id="produto" class="tela"><button class="voltar" data-tela="cardapio">← voltar ao cardápio</button><div id="produto-detalhe"></div></section>
+
+  <section id="campanhas" class="tela"><button class="voltar" data-tela="inicio">← voltar</button><h1>Promoções e campanhas</h1><p class="cinza">Condições demonstrativas para a unidade selecionada.</p><div id="lista-campanhas" class="campanhas"></div></section>
+
+  <section id="carrinho" class="tela"><button class="voltar" data-tela="cardapio">← voltar</button><h1>Seu pedido</h1><div id="itens-carrinho"></div><div class="privacidade-aviso"><b>Seus dados</b><p>Usamos somente o necessário para processar o pedido. Promoções são opcionais.</p><button class="link" data-tela="privacidade">Ver privacidade</button></div><button id="ir-pagamento" class="btn largo">Continuar para pagamento</button></section>
+
+  <section id="pagamento" class="tela"><button class="voltar" data-tela="carrinho">← voltar</button><h1>Pagamento</h1><div id="resumo-pagamento" class="resumo"></div><h3>Como deseja pagar?</h3><div class="pagamentos"><label><input type="radio" name="pagamento" value="Pix" checked> Pix</label><label><input type="radio" name="pagamento" value="Cartão"> Cartão</label><label><input type="radio" name="pagamento" value="Carteira digital"> Carteira digital</label></div><div class="integracao"><b>Pagamento externo</b><p>O pedido envia uma solicitação para um serviço de pagamento externo e aguarda aprovação ou negativa. Nenhum dado real de cartão é armazenado.</p></div><label class="check"><input type="checkbox" id="simular-falha"> Simular falha do serviço de pagamento (teste)</label><button id="pagar" class="btn largo">Enviar pagamento</button><div id="pagamento-erro" class="erro oculto" role="alert"></div></section>
+
+  <section id="processando" class="tela central"><div class="spinner"></div><h1>Processando...</h1><p>Aguardando o retorno do serviço externo.</p></section>
+  <section id="sucesso" class="tela central"><div class="ok">✓</div><h1>Pedido recebido!</h1><p id="numero-pedido"></p><p class="cinza">O pagamento foi aprovado e o pedido foi enviado para a cozinha.</p><button class="btn" data-tela="acompanhar">Acompanhar pedido</button></section>
+
+  <section id="acompanhar" class="tela"><button class="voltar" data-tela="inicio">← início</button><h1>Acompanhar pedido</h1><div class="pedido-cabecalho"><b id="pedido-acompanhamento">#RN-0000</b><span id="pedido-unidade">Retirada no balcão · Centro</span></div><div class="etapas"><div class="feito"><i>✓</i><div><b>Pedido recebido</b><small>Concluído</small></div></div><div class="feito"><i>✓</i><div><b>Pagamento aprovado</b><small>Concluído</small></div></div><div class="atual"><i>●</i><div><b>Em preparo</b><small>Previsão de 15 a 20 minutos</small></div></div><div><i>4</i><div><b>Pronto</b><small>Aguardando</small></div></div><div><i>5</i><div><b>Retirado</b><small>Aguardando</small></div></div></div><button class="btn secundario" id="avancar-status">Simular avanço do pedido</button></section>
+
+  <section id="raizes" class="tela"><button class="voltar" data-tela="inicio">← início</button><h1>Raízes+</h1><div class="pontos"><span>Você tem</span><b><span id="pontos-total">120</span> pontos</b><div class="barra"><span id="barra-pontos"></span></div><small>80 pontos para trocar por R$ 10 de desconto.</small></div><h2>Benefícios</h2><div class="beneficio"><b>R$ 10 de desconto</b><span>200 pontos</span><button class="btn pequeno" data-recompensa="10">Trocar</button></div><div class="beneficio"><b>Bebida grátis</b><span>300 pontos</span><button class="btn pequeno" data-recompensa="bebida">Trocar</button></div></section>
+
+  <section id="conta" class="tela"><button class="voltar" data-tela="inicio">← início</button><h1>Minha conta</h1><div class="perfil"><div class="avatar">J</div><div><b id="nome-conta">João da Silva</b><p id="email-conta">joao@raizes.local</p></div></div><div class="opcoes-conta"><button data-tela="raizes">Raízes+</button><button data-tela="acompanhar">Meus pedidos</button><button data-tela="privacidade">Privacidade e dados</button><button data-tela="operacao">Demonstração da operação</button></div><button id="sair" class="link">Sair da conta</button></div></section>
+
+  <section id="privacidade" class="tela"><button class="voltar" data-tela="conta">← voltar</button><h1>Privacidade e dados</h1><div class="texto-privacidade"><h3>Dados usados</h3><p>Nome e e-mail para conta; dados do pedido para atendimento e execução da compra. O protótipo não coleta dados reais de pagamento.</p><h3>Finalidade</h3><p>Identificação, processamento do pedido, acompanhamento e atendimento.</p><h3>Marketing</h3><label class="check"><input type="checkbox" id="marketing"> Quero receber promoções e novidades.</label><p class="cinza">O consentimento de marketing é opcional e pode ser alterado.</p><h3>Direitos e segurança</h3><p>A solução prevê consulta e alteração de preferências e evita armazenar dados sensíveis de cartão. Em produção, o back-end deverá implementar controles de acesso, auditoria e demais medidas aplicáveis.</p></div></section>
+
+  <section id="operacao" class="tela"><button class="voltar" data-tela="conta">← voltar</button><h1>Operação da unidade</h1><p class="cinza">Tela demonstrativa dos demais atores do sistema.</p><div class="role-grid"><article><b>Atendente</b><p>Consulta pedido, confirma retirada e auxilia o cliente.</p><button class="btn pequeno" data-role="atendente">Abrir visão</button></article><article><b>Cozinha</b><p>Recebe pedido e atualiza o preparo.</p><button class="btn pequeno" data-role="cozinha">Abrir visão</button></article><article><b>Gerente / Administrador</b><p>Consulta vendas, campanhas e operação da unidade.</p><button class="btn pequeno" data-role="gerente">Abrir visão</button></article></div><div id="role-result" class="resumo"></div></section>
+</main>
+
+<nav class="rodape-nav" aria-label="Navegação principal"><button data-tela="inicio">⌂<small>Início</small></button><button data-tela="cardapio">☰<small>Cardápio</small></button><button data-tela="raizes">★<small>Raízes+</small></button><button data-tela="conta">◯<small>Conta</small></button></nav>
+<script src="app.js"></script>
+</body>
+</html>
